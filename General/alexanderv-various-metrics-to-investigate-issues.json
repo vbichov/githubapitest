@@ -1,0 +1,2094 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "slug": "alexanderv-various-metrics-to-investigate-issues",
+    "url": "/d/000036782/alexanderv-various-metrics-to-investigate-issues",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2018-01-19T20:30:48Z",
+    "updated": "2019-05-15T15:08:56Z",
+    "updatedBy": "alexanderv@wix.com",
+    "createdBy": "alexanderv@wix.com",
+    "version": 32,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 0,
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": false,
+    "provisionedExternalId": ""
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 36782,
+    "iteration": 1557932872229,
+    "links": [
+
+    ],
+    "panels": [
+      {
+        "aliasColors": {
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "fill": 1,
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 0
+        },
+        "id": 14,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [
+
+        ],
+        "nullPointMode": "null",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "refId": "A",
+            "target": "sumSeries(source_is_statsd.*.gauges.*.*.*.*.*.*.exception_is_RpcTransportException.*.m1_rate)"
+          }
+        ],
+        "thresholds": [
+
+        ],
+        "timeFrom": null,
+        "timeRegions": [
+
+        ],
+        "timeShift": null,
+        "title": "RPC Timeouts",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": [
+
+          ]
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "aliasColors": {
+        },
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "fill": 1,
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 12,
+          "y": 0
+        },
+        "id": 16,
+        "legend": {
+          "alignAsTable": true,
+          "avg": false,
+          "current": false,
+          "max": true,
+          "min": false,
+          "show": true,
+          "sort": "max",
+          "sortDesc": true,
+          "total": false,
+          "values": true
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [
+
+        ],
+        "nullPointMode": "null",
+        "percentage": false,
+        "pointradius": 5,
+        "points": false,
+        "renderer": "flot",
+        "seriesOverrides": [
+
+        ],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "refId": "A",
+            "target": "aliasByNode(groupByNode(consolidateBy(root_is_system_usage.$dc.host_is_app-docker*.*.metric_is_memory_stats.stats.rss, 'max'), 3, 'average'), 0)",
+            "textEditor": false
+          }
+        ],
+        "thresholds": [
+
+        ],
+        "timeFrom": null,
+        "timeRegions": [
+
+        ],
+        "timeShift": null,
+        "title": "Node services - RSS",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": [
+
+          ]
+        },
+        "yaxes": [
+          {
+            "format": "decbits",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 9
+        },
+        "id": 10,
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 9,
+              "w": 12,
+              "x": 0,
+              "y": 1
+            },
+            "id": 12,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refCount": 0,
+                "refId": "A",
+                "target": "alias(sumSeries(source_is_statsd.$dc.*.*.*.app_name_is_wix-public-war.tag_is_WEB.class_is_DispatcherController.method_is_resolveAndDispatch.m1_rate, sum), 'Public')"
+              },
+              {
+                "hide": false,
+                "refCount": 0,
+                "refId": "B",
+                "target": "alias(sumSeries(source_is_statsd.$dc.*.*.*.app_name_is_wix-public-html-renderer-webapp.tag_is_WEB.class_is_StreamingRendererController.method_is_render.m1_rate, sum), 'HTML Renderer')"
+              },
+              {
+                "refCount": 0,
+                "refId": "C",
+                "target": "alias(sumSeries(source_is_statsd.$dc.gauges.root_is_node_app_info.*.app_name_is_santa-site-renderer.tag_is_WEB.*.resource_is_post_render-stream.m1_rate, sum), 'SSR')"
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Panel Title",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "title": "Row title",
+        "type": "row"
+      },
+      {
+        "collapsed": true,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 10
+        },
+        "id": 8,
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 9,
+              "w": 24,
+              "x": 0,
+              "y": 2
+            },
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refCount": 0,
+                "refId": "A",
+                "target": "alias(sumSeries(source_is_statsd.*.gauges.root_is_node_app_info.*.app_name_is_cloud-mt-server.tag_is_METER.meter_is_cache-miss.m1_rate, sum), 'Cache miss')"
+              },
+              {
+                "refCount": 0,
+                "refId": "B",
+                "target": "alias(sumSeries(source_is_statsd.*.gauges.root_is_node_app_info.*.app_name_is_cloud-mt-server.tag_is_METER.meter_is_cache-hit.m1_rate, sum), 'Cache hit')"
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Redis cache - MT",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 10,
+              "w": 24,
+              "x": 0,
+              "y": 11
+            },
+            "id": 1,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": true,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "E",
+                "target": "alias(movingMedian(aliasSub(root_is_sensu.dc_is_*.host_is_app-ssr8c_42_wixprod_net.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min'), 'app-ssr8c.42 restarted 19:56, traffic - 20:41')",
+                "textEditor": false
+              },
+              {
+                "refId": "B",
+                "target": "alias(movingMedian(aliasSub(root_is_sensu.dc_is_*.host_is_app-ssr13b_42_wixprod_net.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min'), 'app-ssr13b.42 - control')",
+                "textEditor": false
+              },
+              {
+                "hide": false,
+                "refId": "C",
+                "target": "alias(movingMedian(aliasSub(root_is_sensu.dc_is_*.host_is_app-ssr5c_42_wixprod_net.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min'), 'app-ssr5c.42 - non-remote')",
+                "textEditor": false
+              },
+              {
+                "hide": false,
+                "refId": "D",
+                "target": "movingMedian(aliasSub(root_is_sensu.dc_is_*.host_is_app-ssr0a_84_wixprod_net.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min')",
+                "textEditor": false
+              },
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "movingMedian(aliasSub(root_is_sensu.dc_is_*.host_is_app-ssr3a_84_wixprod_net.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory usage on nodes under test",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 21
+            },
+            "id": 2,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": false,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "A",
+                "target": "aliasByNode(movingMedian(aliasSub(root_is_sensu.$dc.$host.type_is_system.memory.usedWOBuffersCaches, 'host_is_(.*)_wixprod_net', '\\1'), '30min'), 2)",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Memory usage per host",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 28
+            },
+            "id": 3,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": true,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "A",
+                "target": "groupByNode(source_is_statsd.dc_is_*.gauges.root_is_node_app_info.*.app_name_is_santa-site-renderer.tag_is_METER.*.countType_is_exclusion.*.m1_rate, 9, 'sum')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Exclusions",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "gridPos": {
+              "h": 7,
+              "w": 24,
+              "x": 0,
+              "y": 35
+            },
+            "id": 4,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": true,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(sumSeries(source_is_statsd.$dc.gauges.root_is_app_info.*.app_name_is_wix-public-html-renderer-webapp.tag_is_*.*.*.exception_is_RenderingFailureException.*.m1_rate, sum), 'RenderingFailureException')"
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "RenderingFailureException",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ],
+            "yaxis": {
+              "align": false,
+              "alignLevel": null
+            }
+          }
+        ],
+        "title": "Row title",
+        "type": "row"
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 16,
+    "style": "dark",
+    "tags": [
+
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "tags": [
+
+            ],
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": "grafanaNet",
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "Host",
+          "multi": true,
+          "name": "host",
+          "options": [
+            {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr-loadtest0a_42_wixprod_net",
+              "value": "host_is_app-ssr-loadtest0a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr-loadtest0a_84_wixprod_net",
+              "value": "host_is_app-ssr-loadtest0a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr080ca_96_wixprod_net",
+              "value": "host_is_app-ssr080ca_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr082da_96_wixprod_net",
+              "value": "host_is_app-ssr082da_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr083aa_96_wixprod_net",
+              "value": "host_is_app-ssr083aa_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr083fa_96_wixprod_net",
+              "value": "host_is_app-ssr083fa_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0845a_96_wixprod_net",
+              "value": "host_is_app-ssr0845a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0865a_96_wixprod_net",
+              "value": "host_is_app-ssr0865a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr08a6a_96_wixprod_net",
+              "value": "host_is_app-ssr08a6a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr08cca_96_wixprod_net",
+              "value": "host_is_app-ssr08cca_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr08dba_96_wixprod_net",
+              "value": "host_is_app-ssr08dba_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr092fa_96_wixprod_net",
+              "value": "host_is_app-ssr092fa_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0963a_96_wixprod_net",
+              "value": "host_is_app-ssr0963a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr09c9a_96_wixprod_net",
+              "value": "host_is_app-ssr09c9a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr09e8a_96_wixprod_net",
+              "value": "host_is_app-ssr09e8a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a00a_96_wixprod_net",
+              "value": "host_is_app-ssr0a00a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a36a_96_wixprod_net",
+              "value": "host_is_app-ssr0a36a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a3da_96_wixprod_net",
+              "value": "host_is_app-ssr0a3da_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a4ca_96_wixprod_net",
+              "value": "host_is_app-ssr0a4ca_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a52a_96_wixprod_net",
+              "value": "host_is_app-ssr0a52a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a95a_96_wixprod_net",
+              "value": "host_is_app-ssr0a95a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a_42_wixprod_net",
+              "value": "host_is_app-ssr0a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a_84_wixprod_net",
+              "value": "host_is_app-ssr0a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0a_96_wixprod_net",
+              "value": "host_is_app-ssr0a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0aa5a_96_wixprod_net",
+              "value": "host_is_app-ssr0aa5a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ac4a_96_wixprod_net",
+              "value": "host_is_app-ssr0ac4a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0acda_96_wixprod_net",
+              "value": "host_is_app-ssr0acda_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0af3a_96_wixprod_net",
+              "value": "host_is_app-ssr0af3a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0af6a_96_wixprod_net",
+              "value": "host_is_app-ssr0af6a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b1aa_96_wixprod_net",
+              "value": "host_is_app-ssr0b1aa_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b30a_96_wixprod_net",
+              "value": "host_is_app-ssr0b30a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b42a_96_wixprod_net",
+              "value": "host_is_app-ssr0b42a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b55a_96_wixprod_net",
+              "value": "host_is_app-ssr0b55a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b6aa_96_wixprod_net",
+              "value": "host_is_app-ssr0b6aa_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0b90a_96_wixprod_net",
+              "value": "host_is_app-ssr0b90a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0bd8a_96_wixprod_net",
+              "value": "host_is_app-ssr0bd8a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0be5a_96_wixprod_net",
+              "value": "host_is_app-ssr0be5a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0bf3a_96_wixprod_net",
+              "value": "host_is_app-ssr0bf3a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0bfca_96_wixprod_net",
+              "value": "host_is_app-ssr0bfca_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c24a_42_wixprod_net",
+              "value": "host_is_app-ssr0c24a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c3bb_96_wixprod_net",
+              "value": "host_is_app-ssr0c3bb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c40b_96_wixprod_net",
+              "value": "host_is_app-ssr0c40b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c46a_42_wixprod_net",
+              "value": "host_is_app-ssr0c46a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c85a_84_wixprod_net",
+              "value": "host_is_app-ssr0c85a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0c96a_42_wixprod_net",
+              "value": "host_is_app-ssr0c96a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0caca_42_wixprod_net",
+              "value": "host_is_app-ssr0caca_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0cb8b_96_wixprod_net",
+              "value": "host_is_app-ssr0cb8b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0cc3a_42_wixprod_net",
+              "value": "host_is_app-ssr0cc3a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0cc9a_42_wixprod_net",
+              "value": "host_is_app-ssr0cc9a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ccfa_42_wixprod_net",
+              "value": "host_is_app-ssr0ccfa_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ce8b_96_wixprod_net",
+              "value": "host_is_app-ssr0ce8b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d26b_96_wixprod_net",
+              "value": "host_is_app-ssr0d26b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d28a_42_wixprod_net",
+              "value": "host_is_app-ssr0d28a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d2eb_96_wixprod_net",
+              "value": "host_is_app-ssr0d2eb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d30a_42_wixprod_net",
+              "value": "host_is_app-ssr0d30a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d50b_96_wixprod_net",
+              "value": "host_is_app-ssr0d50b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d64b_96_wixprod_net",
+              "value": "host_is_app-ssr0d64b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d7bb_96_wixprod_net",
+              "value": "host_is_app-ssr0d7bb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d7da_42_wixprod_net",
+              "value": "host_is_app-ssr0d7da_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d90b_96_wixprod_net",
+              "value": "host_is_app-ssr0d90b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d91b_96_wixprod_net",
+              "value": "host_is_app-ssr0d91b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d92a_84_wixprod_net",
+              "value": "host_is_app-ssr0d92a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0d9ab_96_wixprod_net",
+              "value": "host_is_app-ssr0d9ab_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0de7a_84_wixprod_net",
+              "value": "host_is_app-ssr0de7a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0dfcb_96_wixprod_net",
+              "value": "host_is_app-ssr0dfcb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0dfdb_96_wixprod_net",
+              "value": "host_is_app-ssr0dfdb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0e08b_96_wixprod_net",
+              "value": "host_is_app-ssr0e08b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0e0bb_96_wixprod_net",
+              "value": "host_is_app-ssr0e0bb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0e5ea_84_wixprod_net",
+              "value": "host_is_app-ssr0e5ea_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0e6ab_96_wixprod_net",
+              "value": "host_is_app-ssr0e6ab_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0e71a_42_wixprod_net",
+              "value": "host_is_app-ssr0e71a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ea6b_96_wixprod_net",
+              "value": "host_is_app-ssr0ea6b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0eaca_42_wixprod_net",
+              "value": "host_is_app-ssr0eaca_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0eb7a_42_wixprod_net",
+              "value": "host_is_app-ssr0eb7a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ebca_84_wixprod_net",
+              "value": "host_is_app-ssr0ebca_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ed9a_42_wixprod_net",
+              "value": "host_is_app-ssr0ed9a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ee1b_96_wixprod_net",
+              "value": "host_is_app-ssr0ee1b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0eeda_42_wixprod_net",
+              "value": "host_is_app-ssr0eeda_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ef0b_96_wixprod_net",
+              "value": "host_is_app-ssr0ef0b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f03a_42_wixprod_net",
+              "value": "host_is_app-ssr0f03a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f03a_84_wixprod_net",
+              "value": "host_is_app-ssr0f03a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f11a_84_wixprod_net",
+              "value": "host_is_app-ssr0f11a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f32a_42_wixprod_net",
+              "value": "host_is_app-ssr0f32a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f33b_96_wixprod_net",
+              "value": "host_is_app-ssr0f33b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f3da_42_wixprod_net",
+              "value": "host_is_app-ssr0f3da_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f4da_42_wixprod_net",
+              "value": "host_is_app-ssr0f4da_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f6db_96_wixprod_net",
+              "value": "host_is_app-ssr0f6db_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f72b_96_wixprod_net",
+              "value": "host_is_app-ssr0f72b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0f9eb_96_wixprod_net",
+              "value": "host_is_app-ssr0f9eb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0fa0a_42_wixprod_net",
+              "value": "host_is_app-ssr0fa0a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0fa4b_96_wixprod_net",
+              "value": "host_is_app-ssr0fa4b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0fb1b_96_wixprod_net",
+              "value": "host_is_app-ssr0fb1b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0fb8a_42_wixprod_net",
+              "value": "host_is_app-ssr0fb8a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0fbfb_96_wixprod_net",
+              "value": "host_is_app-ssr0fbfb_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr0ff1a_42_wixprod_net",
+              "value": "host_is_app-ssr0ff1a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1020b_42_wixprod_net",
+              "value": "host_is_app-ssr1020b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1035b_42_wixprod_net",
+              "value": "host_is_app-ssr1035b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1055b_42_wixprod_net",
+              "value": "host_is_app-ssr1055b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10a_96_wixprod_net",
+              "value": "host_is_app-ssr10a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10b1b_42_wixprod_net",
+              "value": "host_is_app-ssr10b1b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10b_42_wixprod_net",
+              "value": "host_is_app-ssr10b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10b_84_wixprod_net",
+              "value": "host_is_app-ssr10b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10c7b_84_wixprod_net",
+              "value": "host_is_app-ssr10c7b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10e5b_42_wixprod_net",
+              "value": "host_is_app-ssr10e5b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr10f9b_42_wixprod_net",
+              "value": "host_is_app-ssr10f9b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1112b_42_wixprod_net",
+              "value": "host_is_app-ssr1112b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1147b_84_wixprod_net",
+              "value": "host_is_app-ssr1147b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr116fb_42_wixprod_net",
+              "value": "host_is_app-ssr116fb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1195b_84_wixprod_net",
+              "value": "host_is_app-ssr1195b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11abb_42_wixprod_net",
+              "value": "host_is_app-ssr11abb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11b_96_wixprod_net",
+              "value": "host_is_app-ssr11b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11c_42_wixprod_net",
+              "value": "host_is_app-ssr11c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11c_84_wixprod_net",
+              "value": "host_is_app-ssr11c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11d3b_42_wixprod_net",
+              "value": "host_is_app-ssr11d3b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11ecb_42_wixprod_net",
+              "value": "host_is_app-ssr11ecb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr11f8b_42_wixprod_net",
+              "value": "host_is_app-ssr11f8b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr121bb_42_wixprod_net",
+              "value": "host_is_app-ssr121bb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1220b_42_wixprod_net",
+              "value": "host_is_app-ssr1220b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr123bb_42_wixprod_net",
+              "value": "host_is_app-ssr123bb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1241b_84_wixprod_net",
+              "value": "host_is_app-ssr1241b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1268b_42_wixprod_net",
+              "value": "host_is_app-ssr1268b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr126db_84_wixprod_net",
+              "value": "host_is_app-ssr126db_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1274b_42_wixprod_net",
+              "value": "host_is_app-ssr1274b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr12a_42_wixprod_net",
+              "value": "host_is_app-ssr12a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr12a_84_wixprod_net",
+              "value": "host_is_app-ssr12a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr12a_96_wixprod_net",
+              "value": "host_is_app-ssr12a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr12fbb_42_wixprod_net",
+              "value": "host_is_app-ssr12fbb_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1307b_42_wixprod_net",
+              "value": "host_is_app-ssr1307b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1320b_42_wixprod_net",
+              "value": "host_is_app-ssr1320b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1342b_84_wixprod_net",
+              "value": "host_is_app-ssr1342b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1382b_42_wixprod_net",
+              "value": "host_is_app-ssr1382b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr13a4b_42_wixprod_net",
+              "value": "host_is_app-ssr13a4b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr13b_42_wixprod_net",
+              "value": "host_is_app-ssr13b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr13b_84_wixprod_net",
+              "value": "host_is_app-ssr13b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr13b_96_wixprod_net",
+              "value": "host_is_app-ssr13b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr13d4b_42_wixprod_net",
+              "value": "host_is_app-ssr13d4b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr140cc_84_wixprod_net",
+              "value": "host_is_app-ssr140cc_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1412c_42_wixprod_net",
+              "value": "host_is_app-ssr1412c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1413c_84_wixprod_net",
+              "value": "host_is_app-ssr1413c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1436c_42_wixprod_net",
+              "value": "host_is_app-ssr1436c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1486c_42_wixprod_net",
+              "value": "host_is_app-ssr1486c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr149ac_42_wixprod_net",
+              "value": "host_is_app-ssr149ac_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr14a_96_wixprod_net",
+              "value": "host_is_app-ssr14a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr14b0c_42_wixprod_net",
+              "value": "host_is_app-ssr14b0c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr14c_42_wixprod_net",
+              "value": "host_is_app-ssr14c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr14c_84_wixprod_net",
+              "value": "host_is_app-ssr14c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1537c_42_wixprod_net",
+              "value": "host_is_app-ssr1537c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1548c_84_wixprod_net",
+              "value": "host_is_app-ssr1548c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1560c_42_wixprod_net",
+              "value": "host_is_app-ssr1560c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr157fc_42_wixprod_net",
+              "value": "host_is_app-ssr157fc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15a_42_wixprod_net",
+              "value": "host_is_app-ssr15a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15a_84_wixprod_net",
+              "value": "host_is_app-ssr15a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15b1c_42_wixprod_net",
+              "value": "host_is_app-ssr15b1c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15b_96_wixprod_net",
+              "value": "host_is_app-ssr15b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15c1c_42_wixprod_net",
+              "value": "host_is_app-ssr15c1c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr15c2c_42_wixprod_net",
+              "value": "host_is_app-ssr15c2c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr162bc_42_wixprod_net",
+              "value": "host_is_app-ssr162bc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr162dc_42_wixprod_net",
+              "value": "host_is_app-ssr162dc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1631c_42_wixprod_net",
+              "value": "host_is_app-ssr1631c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr169ac_42_wixprod_net",
+              "value": "host_is_app-ssr169ac_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16a_96_wixprod_net",
+              "value": "host_is_app-ssr16a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16b_42_wixprod_net",
+              "value": "host_is_app-ssr16b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16b_84_wixprod_net",
+              "value": "host_is_app-ssr16b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16c4c_42_wixprod_net",
+              "value": "host_is_app-ssr16c4c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16dbc_42_wixprod_net",
+              "value": "host_is_app-ssr16dbc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16ddc_84_wixprod_net",
+              "value": "host_is_app-ssr16ddc_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr16efc_42_wixprod_net",
+              "value": "host_is_app-ssr16efc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr175bc_42_wixprod_net",
+              "value": "host_is_app-ssr175bc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr175bc_84_wixprod_net",
+              "value": "host_is_app-ssr175bc_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr175fc_42_wixprod_net",
+              "value": "host_is_app-ssr175fc_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1781c_42_wixprod_net",
+              "value": "host_is_app-ssr1781c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17b0c_84_wixprod_net",
+              "value": "host_is_app-ssr17b0c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17b_96_wixprod_net",
+              "value": "host_is_app-ssr17b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17c_42_wixprod_net",
+              "value": "host_is_app-ssr17c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17c_84_wixprod_net",
+              "value": "host_is_app-ssr17c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17cac_42_wixprod_net",
+              "value": "host_is_app-ssr17cac_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr17d6c_42_wixprod_net",
+              "value": "host_is_app-ssr17d6c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr18a_42_wixprod_net",
+              "value": "host_is_app-ssr18a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr18a_84_wixprod_net",
+              "value": "host_is_app-ssr18a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr18a_96_wixprod_net",
+              "value": "host_is_app-ssr18a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr19b_42_wixprod_net",
+              "value": "host_is_app-ssr19b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr19b_84_wixprod_net",
+              "value": "host_is_app-ssr19b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr19b_96_wixprod_net",
+              "value": "host_is_app-ssr19b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1b_42_wixprod_net",
+              "value": "host_is_app-ssr1b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1b_84_wixprod_net",
+              "value": "host_is_app-ssr1b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr1b_96_wixprod_net",
+              "value": "host_is_app-ssr1b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr2a_96_wixprod_net",
+              "value": "host_is_app-ssr2a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr2c_42_wixprod_net",
+              "value": "host_is_app-ssr2c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr2c_84_wixprod_net",
+              "value": "host_is_app-ssr2c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr3a_42_wixprod_net",
+              "value": "host_is_app-ssr3a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr3a_84_wixprod_net",
+              "value": "host_is_app-ssr3a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr3b_96_wixprod_net",
+              "value": "host_is_app-ssr3b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr4a_96_wixprod_net",
+              "value": "host_is_app-ssr4a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr4b_42_wixprod_net",
+              "value": "host_is_app-ssr4b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr4b_84_wixprod_net",
+              "value": "host_is_app-ssr4b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr5b_96_wixprod_net",
+              "value": "host_is_app-ssr5b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr5c_42_wixprod_net",
+              "value": "host_is_app-ssr5c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr5c_84_wixprod_net",
+              "value": "host_is_app-ssr5c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr6a_42_wixprod_net",
+              "value": "host_is_app-ssr6a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr6a_84_wixprod_net",
+              "value": "host_is_app-ssr6a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr6a_96_wixprod_net",
+              "value": "host_is_app-ssr6a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr7b_42_wixprod_net",
+              "value": "host_is_app-ssr7b_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr7b_84_wixprod_net",
+              "value": "host_is_app-ssr7b_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr7b_96_wixprod_net",
+              "value": "host_is_app-ssr7b_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr8a_96_wixprod_net",
+              "value": "host_is_app-ssr8a_96_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr8c_42_wixprod_net",
+              "value": "host_is_app-ssr8c_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr8c_84_wixprod_net",
+              "value": "host_is_app-ssr8c_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr9a_42_wixprod_net",
+              "value": "host_is_app-ssr9a_42_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr9a_84_wixprod_net",
+              "value": "host_is_app-ssr9a_84_wixprod_net"
+            },
+            {
+              "selected": false,
+              "text": "host_is_app-ssr9b_96_wixprod_net",
+              "value": "host_is_app-ssr9b_96_wixprod_net"
+            }
+          ],
+          "query": "root_is_sensu.dc_is_*.host_is_app-ssr*",
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [
+
+          ],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "tags": [
+
+            ],
+            "text": "dc_is_42",
+            "value": "dc_is_42"
+          },
+          "datasource": "grafanaNet",
+          "definition": "",
+          "hide": 0,
+          "includeAll": true,
+          "label": "DC",
+          "multi": false,
+          "name": "dc",
+          "options": [
+            {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_42",
+              "value": "dc_is_42"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_84",
+              "value": "dc_is_84"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_96",
+              "value": "dc_is_96"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_ams",
+              "value": "dc_is_ams"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_aus",
+              "value": "dc_is_aus"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_auspci",
+              "value": "dc_is_auspci"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_dc11",
+              "value": "dc_is_dc11"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_dc11pci",
+              "value": "dc_is_dc11pci"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_gcp",
+              "value": "dc_is_gcp"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_sv5",
+              "value": "dc_is_sv5"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_sv5pci",
+              "value": "dc_is_sv5pci"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_tam",
+              "value": "dc_is_tam"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_tampci",
+              "value": "dc_is_tampci"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_tbd",
+              "value": "dc_is_tbd"
+            },
+            {
+              "selected": false,
+              "text": "dc_is_unknown",
+              "value": "dc_is_unknown"
+            }
+          ],
+          "query": "root_is_sensu.dc_is_*",
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [
+
+          ],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "[alexanderv] Various metrics to investigate issues",
+    "uid": "000036782",
+    "version": 32
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "slug": "auto-fedops-apollo-test",
+    "url": "/d/000004311/auto-fedops-apollo-test",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2017-06-20T07:48:40Z",
+    "updated": "2017-06-22T07:34:25Z",
+    "updatedBy": "Anonymous",
+    "createdBy": "Anonymous",
+    "version": 10,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 0,
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": false,
+    "provisionedExternalId": ""
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "hideControls": false,
+    "id": 4311,
+    "links": [
+
+    ],
+    "refresh": false,
+    "rows": [
+      {
+        "collapse": false,
+        "height": "200",
+        "panels": [
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "datasourceId": 1,
+                    "model": {
+                      "refId": "C",
+                      "target": "alias(divideSeries(#B, #A), 'success rate')",
+                      "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_finish'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_start')), 'success rate')"
+                    },
+                    "params": [
+                      "C",
+                      "120m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "min"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.9
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "or"
+                  },
+                  "query": {
+                    "params": [
+                      "C",
+                      "120m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "max"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60m",
+              "handler": 1,
+              "message": " #apollo-fedops",
+              "name": "[apollo-test] app load",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 0,
+            "grid": {
+            },
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              },
+              {
+                "alias": "event_finish",
+                "yaxis": 2
+              },
+              {
+                "alias": "success rate",
+                "color": "#70DBED"
+              },
+              {
+                "alias": "threshold",
+                "color": "#BF1B00",
+                "linewidth": 2,
+                "zindex": -1
+              }
+            ],
+            "spaceLength": 10,
+            "span": 9,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_start')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "B",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_finish')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "D",
+                "target": "movingMedian(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), 10)",
+                "textEditor": true
+              },
+              {
+                "hide": true,
+                "refId": "E",
+                "target": "stdev(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), 10, 0.1)",
+                "textEditor": true
+              },
+              {
+                "hide": true,
+                "refId": "F",
+                "target": "alias(divideSeries(#E, #D), 'anomaly')",
+                "targetFull": "alias(divideSeries(stdev(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), 10, 0.1), movingMedian(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), 10)), 'anomaly')",
+                "textEditor": true
+              },
+              {
+                "refId": "C",
+                "target": "alias(divideSeries(#B, #A), 'success rate')",
+                "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_finish'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_apollo-test.browser_family_is_*.country_code_is_*), '60m', 'sum', false), 60), 'event_start')), 'success rate')"
+              },
+              {
+                "refId": "G",
+                "target": "alias(constantLine(0.9), 'threshold')"
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 1.1
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Success rate",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": "success rate",
+                "logBase": 1,
+                "max": "1.2",
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "hits",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+            },
+            "id": 2,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "sort": "avg",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              }
+            ],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "A",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_11.agg_field_is_duration.app_name_is_apollo-test.browser_family_is_chrome.country_code_is_us.agg_type_is_p50, '120min'), 95), 'median')",
+                "textEditor": false
+              },
+              {
+                "refId": "B",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_11.agg_field_is_duration.app_name_is_apollo-test.browser_family_is_chrome.country_code_is_us.agg_type_is_p95, '180min'), 95), 'p95')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Load Time Median  (us, chrome)",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Row",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": "200",
+        "panels": [
+          {
+            "cacheTimeout": null,
+            "colorBackground": false,
+            "colorValue": true,
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "datasource": null,
+            "decimals": 0,
+            "editable": true,
+            "error": false,
+            "format": "percentunit",
+            "gauge": {
+              "maxValue": 1,
+              "minValue": 0,
+              "show": true,
+              "thresholdLabels": false,
+              "thresholdMarkers": true
+            },
+            "hideTimeOverride": false,
+            "id": 10,
+            "interval": null,
+            "links": [
+
+            ],
+            "mappingType": 1,
+            "mappingTypes": [
+              {
+                "name": "value to text",
+                "value": 1
+              },
+              {
+                "name": "range to text",
+                "value": 2
+              }
+            ],
+            "maxDataPoints": 100,
+            "nullPointMode": "connected",
+            "nullText": null,
+            "postfix": "",
+            "postfixFontSize": "50%",
+            "prefix": "",
+            "prefixFontSize": "50%",
+            "rangeMaps": [
+              {
+                "from": "null",
+                "text": "N/A",
+                "to": "null"
+              }
+            ],
+            "span": 2,
+            "sparkline": {
+              "fillColor": "rgba(31, 118, 189, 0.18)",
+              "full": false,
+              "lineColor": "rgb(31, 120, 193)",
+              "show": false
+            },
+            "tableColumn": "",
+            "targets": [
+              {
+                "hide": true,
+                "refId": "A",
+                "target": "summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false)",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "B",
+                "target": "summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false)",
+                "textEditor": false
+              },
+              {
+                "refId": "C",
+                "target": "alias(divideSeries(#B, #A), 'success rate')",
+                "targetFull": "alias(divideSeries(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction)), 'success rate')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": "0.5,0.9",
+            "timeFrom": null,
+            "title": "add-apollo-interaction",
+            "type": "singlestat",
+            "valueFontSize": "120%",
+            "valueMaps": [
+              {
+                "op": "=",
+                "text": "N/A",
+                "value": "null"
+              }
+            ],
+            "valueName": "current"
+          },
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "datasourceId": 1,
+                    "model": {
+                      "refId": "C",
+                      "target": "alias(divideSeries(#B, #A), 'success rate')",
+                      "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction ended'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction started')), 'success rate')"
+                    },
+                    "params": [
+                      "C",
+                      "120m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "min"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.9
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "or"
+                  },
+                  "query": {
+                    "params": [
+                      "C",
+                      "120m",
+                      "now"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "max"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "60m",
+              "handler": 1,
+              "message": " #apollo-fedops",
+              "name": "[apollo-test] add-apollo-interaction",
+              "noDataState": "keep_state",
+              "notifications": [
+
+              ]
+            },
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 0,
+            "grid": {
+            },
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "interaction started",
+                "yaxis": 2
+              },
+              {
+                "alias": "interaction ended",
+                "yaxis": 2
+              },
+              {
+                "alias": "success rate",
+                "color": "#70DBED"
+              },
+              {
+                "alias": "threshold",
+                "color": "#BF1B00",
+                "linewidth": 2,
+                "zindex": -1
+              }
+            ],
+            "spaceLength": 10,
+            "span": 7,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction started')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "B",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction ended')",
+                "textEditor": false
+              },
+              {
+                "refId": "C",
+                "target": "alias(divideSeries(#B, #A), 'success rate')",
+                "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction ended'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_apollo-test.browser_family_is_*.country_code_is_*.name_is_add-apollo-interaction), '60m', 'sum', false), 60), 'interaction started')), 'success rate')"
+              },
+              {
+                "refId": "D",
+                "target": "alias(constantLine(0.9), 'threshold')"
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 1.1
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "add-apollo-interaction",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "transparent": false,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": "success rate",
+                "logBase": 1,
+                "max": "1.2",
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "hits",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+            },
+            "id": 12,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "sort": "avg",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              }
+            ],
+            "spaceLength": 10,
+            "span": 3,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "A",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_16.agg_field_is_duration.app_name_is_apollo-test.browser_family_is_chrome.country_code_is_us.name_is_add-apollo-interaction.agg_type_is_p50, '120min'), 95), 'median')",
+                "textEditor": false
+              },
+              {
+                "refId": "B",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_16.agg_field_is_duration.app_name_is_apollo-test.browser_family_is_chrome.country_code_is_us.name_is_add-apollo-interaction.agg_type_is_p95, '180min'), 95), 'p95')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "add-apollo-interaction",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "Interactions",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [
+      "fedops"
+    ],
+    "templating": {
+      "list": [
+
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "[auto][fedops] Apollo Test",
+    "uid": "000004311",
+    "version": 10
+  }
+}
