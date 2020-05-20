@@ -1,0 +1,589 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "slug": "app-error-rate-per-endpoint-template-vitalyb-copy",
+    "url": "/d/000010201/app-error-rate-per-endpoint-template-vitalyb-copy",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2017-11-08T10:17:49Z",
+    "updated": "2017-11-08T15:13:47Z",
+    "updatedBy": "vitalyb@wix.com",
+    "createdBy": "vitalyb@wix.com",
+    "version": 5,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 0,
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": false,
+    "provisionedExternalId": ""
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        },
+        {
+          "datasource": "monitoring",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgb(21, 249, 5)",
+          "limit": 100,
+          "name": "deployments",
+          "rawQuery": "SELECT UNIX_TIMESTAMP(created) as time_sec, CAST(json_extract(jdoc, '$.event') as CHAR(250)) as text, CAST(json_extract(jdoc, '$.version') as CHAR(250)) as tags FROM ci_changes WHERE ($__timeFilter(created) AND json_extract(jdoc, '$.artifactId')='wix-public-war') ORDER BY created DESC LIMIT 50\n ",
+          "showIn": 0,
+          "type": "alert"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "hideControls": false,
+    "id": 10201,
+    "links": [
+
+    ],
+    "refresh": false,
+    "rows": [
+      {
+        "collapse": true,
+        "height": "200px",
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "id": 6,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "method": {
+                "selected": false,
+                "text": "get",
+                "value": "get"
+              }
+            },
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p99, 'max'), 8, 'avg'), 10), 'p99')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "B",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p50, 'max'), 8, 'avg'), 10), 'p50')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "C",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p999, 'max'), 8, 'avg'), 10), 'p999')",
+                "textEditor": true
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$method",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 2,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": "method",
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "$method",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": true,
+        "height": "200px",
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "id": 9,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "method": {
+                "selected": false,
+                "text": "getDocHeader",
+                "value": "getDocHeader"
+              }
+            },
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p99, 'max'), 8, 'avg'), 10), 'p99')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "B",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p50, 'max'), 8, 'avg'), 10), 'p50')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "C",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p999, 'max'), 8, 'avg'), 10), 'p999')",
+                "textEditor": true
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$method",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 2,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": 1510153977953,
+        "repeatRowId": 1,
+        "showTitle": true,
+        "title": "$method",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": "200px",
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "scopedVars": {
+              "method": {
+                "selected": false,
+                "text": "getDocHeaderOld",
+                "value": "getDocHeaderOld"
+              }
+            },
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "span": 4,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p99, 'max'), 8, 'avg'), 10), 'p99')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "B",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p50, 'max'), 8, 'avg'), 10), 'p50')",
+                "textEditor": true
+              },
+              {
+                "hide": false,
+                "refId": "C",
+                "target": "alias(movingMedian(groupByNode(consolidateBy(source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_$method.p999, 'max'), 8, 'avg'), 10), 'p999')",
+                "textEditor": true
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "$method",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": null,
+                "logBase": 2,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": 1510153977953,
+        "repeatRowId": 1,
+        "showTitle": true,
+        "title": "$method",
+        "titleSize": "h6"
+      },
+      {
+        "collapse": false,
+        "height": 250,
+        "panels": [
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "id": 11,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "span": 12,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Panel Title",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": false,
+        "title": "Dashboard Row",
+        "titleSize": "h6"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [
+
+    ],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "text": "All",
+            "value": [
+              "$__all"
+            ]
+          },
+          "datasource": "grafanaNet",
+          "hide": 0,
+          "includeAll": true,
+          "label": null,
+          "multi": true,
+          "name": "method",
+          "options": [
+
+          ],
+          "query": "source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_$app.tag_is_{WEB,RPC_SERVER}.*.method_is_g*",
+          "refresh": 1,
+          "regex": "/method_is_(.*)/",
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [
+
+          ],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "text": "wix-public-war",
+            "value": "wix-public-war"
+          },
+          "datasource": "grafanaNet",
+          "hide": 0,
+          "includeAll": false,
+          "label": null,
+          "multi": false,
+          "name": "app",
+          "options": [
+
+          ],
+          "query": "source_is_statsd.dc_is_*.gauges.root_is_app_info.host_is_*.app_name_is_wix-public-w*",
+          "refresh": 1,
+          "regex": "/app_name_is_(.*)/",
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [
+
+          ],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now-3h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "",
+    "title": "app error rate per endpoint template vitalyb Copy",
+    "uid": "000010201",
+    "version": 5
+  }
+}
