@@ -1,0 +1,853 @@
+{
+  "meta": {
+    "type": "db",
+    "canSave": true,
+    "canEdit": true,
+    "canAdmin": true,
+    "canStar": true,
+    "slug": "auto-fedops-contacts",
+    "url": "/d/000006471/auto-fedops-contacts",
+    "expires": "0001-01-01T00:00:00Z",
+    "created": "2017-07-31T13:12:17Z",
+    "updated": "2017-10-29T06:51:10Z",
+    "updatedBy": "Anonymous",
+    "createdBy": "Anonymous",
+    "version": 202,
+    "hasAcl": false,
+    "isFolder": false,
+    "folderId": 0,
+    "folderTitle": "General",
+    "folderUrl": "",
+    "provisioned": false,
+    "provisionedExternalId": ""
+  },
+  "dashboard": {
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        },
+        {
+          "datasource": "monitoring",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgb(253, 107, 255)",
+          "limit": 100,
+          "name": "deployments",
+          "rawQuery": "SELECT UNIX_TIMESTAMP(created) as time_sec, \nCAST(json_extract(jdoc, '$.event') as CHAR(250)) as text, \nCAST(json_extract(jdoc, '$.artifactId') as CHAR(250)) as tags \nFROM ci_changes \nWHERE ($__timeFilter(created) AND json_extract(jdoc, '$.artifactId')='wixstores-client-settings-editor')\nORDER BY created DESC LIMIT 50",
+          "showIn": 0,
+          "type": "alert"
+        },
+        {
+          "datasource": "monitoring",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgb(101, 219, 255)",
+          "limit": 100,
+          "name": "petri",
+          "rawQuery": "SELECT\n    UNIX_TIMESTAMP(created) as time_sec,\n    CAST(json_extract(jdoc, '$.action') as CHAR(250)) as text,\n    CAST(json_extract(jdoc, '$.key') as CHAR(250)) as tags\n  FROM petri_audit   WHERE $__timeFilter(created) AND json_extract(jdoc, '$.scopes') LIKE '%html-renderer-server%' ORDER BY created DESC LIMIT 10",
+          "showIn": 0,
+          "type": "alert"
+        },
+        {
+          "datasource": "monitoring",
+          "enable": true,
+          "hide": false,
+          "iconColor": "rgb(0, 25, 245)",
+          "limit": 100,
+          "name": "network changes",
+          "rawQuery": "SELECT\n    UNIX_TIMESTAMP(message_ts) as time_sec,\n    plain_text as text, title as tags\n  FROM email_events WHERE $__timeFilter(message_ts)\n  ORDER BY message_ts ASC\n  LIMIT 100\n  ",
+          "showIn": 0,
+          "type": "alert"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 1,
+    "hideControls": true,
+    "id": 6471,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "keepTime": true,
+        "tags": [
+          "fedops drilldown"
+        ],
+        "targetBlank": true,
+        "type": "dashboards"
+      }
+    ],
+    "refresh": "5m",
+    "rows": [
+      {
+        "collapse": false,
+        "height": "200",
+        "panels": [
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "datasourceId": 1,
+                    "model": {
+                      "refId": "C",
+                      "target": "alias(divideSeries(#B, #A), 'success rate')",
+                      "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_finish'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_start')), 'success rate')"
+                    },
+                    "params": [
+                      "C",
+                      "240m",
+                      "now-1m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "min"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.9
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "or"
+                  },
+                  "query": {
+                    "params": [
+                      "C",
+                      "240m",
+                      "now-1m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "max"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "120m",
+              "handler": 1,
+              "message": " #contacts-idc",
+              "name": "[contacts] app load",
+              "noDataState": "keep_state",
+              "notifications": [
+                {
+                  "id": 1
+                }
+              ]
+            },
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 0,
+            "grid": {
+            },
+            "id": 1,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              },
+              {
+                "alias": "event_finish",
+                "yaxis": 2
+              },
+              {
+                "alias": "success rate",
+                "color": "#70DBED"
+              },
+              {
+                "alias": "threshold",
+                "color": "#BF1B00",
+                "linewidth": 2,
+                "zindex": -1
+              }
+            ],
+            "spaceLength": 10,
+            "span": 7,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_start')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "B",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_finish')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "D",
+                "target": "movingMedian(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), 10)",
+                "textEditor": true
+              },
+              {
+                "hide": true,
+                "refId": "E",
+                "target": "stdev(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), 10, 0.1)",
+                "textEditor": true
+              },
+              {
+                "hide": true,
+                "refId": "F",
+                "target": "alias(divideSeries(#E, #D), 'anomaly')",
+                "targetFull": "alias(divideSeries(stdev(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), 10, 0.1), movingMedian(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), 10)), 'anomaly')",
+                "textEditor": true
+              },
+              {
+                "refId": "C",
+                "target": "alias(divideSeries(#B, #A), 'success rate')",
+                "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_11.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_finish'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_14.app_name_is_contacts.browser_family_is_*.country_code_is_*), '120m', 'sum', false), 60), 'event_start')), 'success rate')"
+              },
+              {
+                "refId": "G",
+                "target": "alias(constantLine(0.9), 'threshold')"
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 1.1
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Success rate",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": "success rate",
+                "logBase": 1,
+                "max": "1.2",
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "hits",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 8,
+            "grid": {
+            },
+            "id": 2,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "sort": "avg",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 1,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              }
+            ],
+            "spaceLength": 10,
+            "span": 5,
+            "stack": true,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "D",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_11.agg_field_is_first_request_duration.app_name_is_contacts.browser_family_is_chrome.country_code_is_us.agg_type_is_p50, '240min'), 95), 'first request roundtrip')",
+                "textEditor": false
+              },
+              {
+                "refId": "A",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_11.agg_field_is_duration.app_name_is_contacts.browser_family_is_chrome.country_code_is_us.agg_type_is_p50, '240min'), 95), 'app load')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "Load Time Median  (us, chrome)",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "fill": 1,
+            "id": 14,
+            "legend": {
+              "alignAsTable": true,
+              "avg": false,
+              "current": true,
+              "max": false,
+              "min": false,
+              "rightSide": true,
+              "show": true,
+              "sort": "current",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+
+            ],
+            "spaceLength": 10,
+            "span": 5,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "B",
+                "target": "aliasByNode(keepLastValue(wix-bi-tube.root_is_events_catalog.src_is_72.app_name_is_contacts.bundle_name*.bundle_size, 100000), 4)",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": "30d",
+            "timeShift": null,
+            "title": "bundle sizes",
+            "tooltip": {
+              "shared": true,
+              "sort": 0,
+              "value_type": "individual"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "decbytes",
+                "label": null,
+                "logBase": 2,
+                "max": null,
+                "min": null,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": null,
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "App Load",
+        "titleSize": "h3"
+      },
+      {
+        "collapse": false,
+        "height": "200",
+        "panels": [
+          {
+            "alert": {
+              "conditions": [
+                {
+                  "evaluator": {
+                    "params": [
+                      1.1
+                    ],
+                    "type": "gt"
+                  },
+                  "operator": {
+                    "type": "and"
+                  },
+                  "query": {
+                    "datasourceId": 1,
+                    "model": {
+                      "refId": "C",
+                      "target": "alias(divideSeries(#B, #A), 'success rate')",
+                      "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction ended'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction started')), 'success rate')"
+                    },
+                    "params": [
+                      "C",
+                      "240m",
+                      "now-1m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "min"
+                  },
+                  "type": "query"
+                },
+                {
+                  "evaluator": {
+                    "params": [
+                      0.9
+                    ],
+                    "type": "lt"
+                  },
+                  "operator": {
+                    "type": "or"
+                  },
+                  "query": {
+                    "params": [
+                      "C",
+                      "240m",
+                      "now-1m"
+                    ]
+                  },
+                  "reducer": {
+                    "params": [
+
+                    ],
+                    "type": "max"
+                  },
+                  "type": "query"
+                }
+              ],
+              "executionErrorState": "keep_state",
+              "frequency": "120m",
+              "handler": 1,
+              "message": " #contacts-idc",
+              "name": "[contacts] navigationtocardfromtable",
+              "noDataState": "keep_state",
+              "notifications": [
+
+              ]
+            },
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 0,
+            "grid": {
+            },
+            "id": 10,
+            "legend": {
+              "avg": false,
+              "current": false,
+              "max": false,
+              "min": false,
+              "show": true,
+              "total": false,
+              "values": false
+            },
+            "lines": true,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "null",
+            "percentage": false,
+            "pointradius": 5,
+            "points": false,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "interaction started",
+                "yaxis": 2
+              },
+              {
+                "alias": "interaction ended",
+                "yaxis": 2
+              },
+              {
+                "alias": "success rate",
+                "color": "#70DBED"
+              },
+              {
+                "alias": "threshold",
+                "color": "#BF1B00",
+                "linewidth": 2,
+                "zindex": -1
+              }
+            ],
+            "spaceLength": 10,
+            "span": 7,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "hide": false,
+                "refId": "A",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction started')",
+                "textEditor": false
+              },
+              {
+                "hide": true,
+                "refId": "B",
+                "target": "alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction ended')",
+                "textEditor": false
+              },
+              {
+                "refId": "C",
+                "target": "alias(divideSeries(#B, #A), 'success rate')",
+                "targetFull": "alias(divideSeries(alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_16.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction ended'), alias(scaleToSeconds(summarize(sumSeries(wix-bi-tube.root_is_events_catalog.src_is_72.evid_is_15.app_name_is_contacts.browser_family_is_*.country_code_is_*.name_is_navigationtocardfromtable), '120m', 'sum', false), 60), 'interaction started')), 'success rate')"
+              },
+              {
+                "refId": "D",
+                "target": "alias(constantLine(0.9), 'threshold')"
+              }
+            ],
+            "thresholds": [
+              {
+                "colorMode": "critical",
+                "fill": true,
+                "line": true,
+                "op": "gt",
+                "value": 1.1
+              }
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "navigationtocardfromtable",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "transparent": false,
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "percentunit",
+                "label": "success rate",
+                "logBase": 1,
+                "max": "1.2",
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "hits",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          },
+          {
+            "aliasColors": {
+            },
+            "bars": false,
+            "dashLength": 10,
+            "dashes": false,
+            "datasource": null,
+            "editable": true,
+            "error": false,
+            "fill": 1,
+            "grid": {
+            },
+            "id": 11,
+            "legend": {
+              "alignAsTable": true,
+              "avg": true,
+              "current": true,
+              "max": false,
+              "min": false,
+              "show": true,
+              "sort": "avg",
+              "sortDesc": true,
+              "total": false,
+              "values": true
+            },
+            "lines": false,
+            "linewidth": 1,
+            "links": [
+
+            ],
+            "nullPointMode": "connected",
+            "percentage": false,
+            "pointradius": 1,
+            "points": true,
+            "renderer": "flot",
+            "seriesOverrides": [
+              {
+                "alias": "event_start",
+                "yaxis": 2
+              }
+            ],
+            "spaceLength": 10,
+            "span": 5,
+            "stack": false,
+            "steppedLine": false,
+            "targets": [
+              {
+                "refId": "A",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_16.agg_field_is_duration.app_name_is_contacts.browser_family_is_chrome.country_code_is_us.name_is_navigationtocardfromtable.agg_type_is_p50, '240min'), 95), 'median')",
+                "textEditor": false
+              },
+              {
+                "refId": "B",
+                "target": "alias(removeAbovePercentile(movingMedian(wix-bi-tube.root_is_performance_catalog.src_is_72.evid_is_16.agg_field_is_duration.app_name_is_contacts.browser_family_is_chrome.country_code_is_us.name_is_navigationtocardfromtable.agg_type_is_p95, '240min'), 95), 'p95')",
+                "textEditor": false
+              }
+            ],
+            "thresholds": [
+
+            ],
+            "timeFrom": null,
+            "timeShift": null,
+            "title": "navigationtocardfromtable",
+            "tooltip": {
+              "msResolution": false,
+              "shared": true,
+              "sort": 0,
+              "value_type": "cumulative"
+            },
+            "type": "graph",
+            "xaxis": {
+              "buckets": null,
+              "mode": "time",
+              "name": null,
+              "show": true,
+              "values": [
+
+              ]
+            },
+            "yaxes": [
+              {
+                "format": "ms",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": 0,
+                "show": true
+              },
+              {
+                "format": "short",
+                "label": "",
+                "logBase": 1,
+                "max": null,
+                "min": null,
+                "show": true
+              }
+            ]
+          }
+        ],
+        "repeat": null,
+        "repeatIteration": null,
+        "repeatRowId": null,
+        "showTitle": true,
+        "title": "User Interactions",
+        "titleSize": "h3"
+      }
+    ],
+    "schemaVersion": 14,
+    "style": "dark",
+    "tags": [
+      "fedops"
+    ],
+    "templating": {
+      "list": [
+
+      ]
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ]
+    },
+    "timezone": "browser",
+    "title": "[auto][fedops] Contacts",
+    "uid": "000006471",
+    "version": 202
+  }
+}
